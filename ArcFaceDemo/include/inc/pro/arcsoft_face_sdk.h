@@ -32,7 +32,6 @@ extern "C" {
 #define ASF_GENDER				0x00000010	//性别
 #define ASF_FACE3DANGLE			0x00000020	//3D角度
 #define ASF_LIVENESS			0x00000080	//RGB活体
-#define ASF_IMAGEQUALITY		0x00000200	//图像质量检测
 #define ASF_IR_LIVENESS			0x00000400	//IR活体
 
 
@@ -189,25 +188,7 @@ extern "C" {
 		ASF_DetectModel		detectModel = ASF_DETECT_MODEL_RGB	// [in]	预留字段，当前版本使用默认参数即可
 		);
 
-	//******************************** 图像质量检测相关 **********************************************
-	typedef struct
-	{
-		MFloat *faceQualityValue;	//人脸质量
-		MInt32 num;                 //人脸数量
-	}ASF_ImageQualityInfo, *LPASF_ImageQualityInfo;
-
-	/******************************************************
-	* 图像质量检测，推荐阈值0.35
-	* 图像数据以结构体形式传入，对采用更高字节对齐方式的图像兼容性更好
-	******************************************************/
-	MRESULT ASFImageQualityDetectEx(
-		MHandle					hEngine,							// [in] 引擎handle
-		LPASF_ImageData			imgData,							// [in] 图片数据
-		LPASF_MultiFaceInfo		detectedFaces,						// [in] 人脸位置信息 
-		LPASF_ImageQualityInfo	imageQualityInfo,					// [out] 图像质量检测结果
-		ASF_DetectModel			detectModel = ASF_DETECT_MODEL_RGB	// [in]	预留字段，当前版本使用默认参数即可
-		);
-
+	//******************************** 人脸属性检测相关 **********************************************
 	typedef struct{
 		MFloat		thresholdmodel_BGR;
 		MFloat		thresholdmodel_IR;
